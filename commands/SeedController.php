@@ -22,8 +22,10 @@ class SeedController extends Controller
         $user->email = $faker->email;
         $user->username = 'test';
         $user->phone = $faker->phoneNumber;
-        $user->password_hash = \Yii::$app->security->generatePasswordHash('test');
-        $user->access_token = \Yii::$app->security->generateRandomString(1024);
+
+        $security = \Yii::$app->security;
+        $user->password_hash = $security->generatePasswordHash('test');
+        $user->access_token = $security->generateRandomString(1024);
 
         if($user->save()){
             Console::output('Successfully saved');
@@ -43,8 +45,10 @@ class SeedController extends Controller
             $user->email = $faker->email;
             $user->username = $faker->userName;
             $user->phone = $faker->phoneNumber;
-            $user->password_hash = \Yii::$app->security->generatePasswordHash('test');
-            $user->access_token = \Yii::$app->security->generateRandomString(1024);
+
+            $security = \Yii::$app->security;
+            $user->password_hash = $security->generatePasswordHash('test');
+            $user->access_token = $security->generateRandomString(1024);
 
             if($user->save()){
                 Console::output('Successfully saved');
