@@ -3,22 +3,35 @@
 namespace app\modules\api\controllers;
 
 use Yii;
-use yii\filters\AccessControl;
-use yii\filters\Cors;
 use yii\rest\Controller;
+use yii\filters\Cors;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\filters\auth\HttpBearerAuth;
 use app\models\User;
 use app\modules\api\models\LoginForm;
 use app\modules\api\models\RegisterForm;
 
 class AuthController extends Controller
 {
+    public $enableCsrfValidation = false;
+
+    private static function allowedDomains()
+    {
+        return [
+//             '*',                        // star allows all domains
+            'http://127.0.0.1:5173',
+//            'http://test2.example.com',
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
     public function behaviors()
     {
-        return array_merge(parent::behaviors(),
+        $behaviors = parent::behaviors();
+        return array_merge($behaviors,
             [
                 'access' => [
                     'class' => AccessControl::class,
@@ -31,13 +44,25 @@ class AuthController extends Controller
                         ],
                     ],
                 ],
-                'cors' => Cors::class,
+                'corsFilter' => [
+                    'class' => Cors::class,
+                    'cors' => [
+                        'Origin' => static::allowedDomains(),
+                        'Access-Control-Request-Method' => ['POST'],
+                        'Access-Control-Allow-Credentials' => true,
+                        'Access-Control-Allow-Headers' => ['*']
+                    ],
+                ],
+//                'authenticator' => [
+//                    'class' => HttpBearerAuth::class,
+//                    'except' => ['options']
+//                ],
                 'verbs' => [
                     'class' => VerbFilter::class,
                     'actions' => [
                         'logout' => ['delete'],
                         'register' => ['post'],
-                        'login' => ['post']
+                        'login' => ['post', 'options']
                     ],
                 ],
             ]);
@@ -89,15 +114,5 @@ class AuthController extends Controller
         return [
             'errors' => $model->errors
         ];
-    }
-
-    /**
-     * Logout action.
-     *
-     * @return bool
-     */
-    public function actionLogout(): bool
-    {
-        return Yii::$app->user->logout();
     }
 }

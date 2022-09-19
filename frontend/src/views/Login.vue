@@ -4,20 +4,18 @@
         <form @submit.prevent="login" action="">
             <div v-if="errors" class="errors">
                 <p v-for="(error, field) in errors" :key="field">
-                    {{error[0]}}
+                    {{ error[0] }}
                 </p>
             </div>
             <input type="text" v-model="form.username" placeholder="Your username"><br>
             <input type="password" v-model="form.password" placeholder="Your password"><br>
             <button>Login</button>
-            <Button label="Secondary" class="p-button-secondary"></Button>
-            <Button label="Primary" class="p-button-raised p-button-rounded" />
-
             <router-link to="/register" class="link">Click here to register</router-link>
         </form>
     </div>
 </template>
 <script>
+
 export default {
     name: "Login",
     data() {
@@ -31,12 +29,12 @@ export default {
     },
     methods: {
         async login() {
-            // const {success, errors} = await authService.login(this.form);
-            // if (success) {
-            //     this.$router.push({name: 'home'});
-            // } else {
-            //     this.errors = errors;
-            // }
+            try {
+                await this.$store.dispatch('login', this.form);
+                this.$router.push({name: 'home'});
+            } catch (e) {
+                this.errors = e.response.data.errors;
+            }
         }
     }
 }

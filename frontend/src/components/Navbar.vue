@@ -5,17 +5,31 @@ import {RouterLink} from 'vue-router'
 <template>
     <nav>
         <RouterLink to="/">Main</RouterLink>
-<!--        <div v-if="authService.isLoggedIn" class="move-right">-->
-        <div class="move-right">
+        <div v-if="!isLoggedIn" class="move-right">
             <RouterLink to="/login">Login</RouterLink>
             <RouterLink to="/register">Register</RouterLink>
+        </div>
+        <div v-if="isLoggedIn" class="move-right">
+            <a href="/logout" @click="logout">Logout</a>
         </div>
     </nav>
 </template>
 
 <script>
 export default {
-    name: "Navbar"
+    name: "Navbar",
+    computed: {
+        isLoggedIn: function () {
+            return this.$store.getters.isLoggedIn;
+        }
+    },
+    methods: {
+        logout: function (e) {
+            e.preventDefault();
+            this.$store.dispatch('logout')
+            this.$router.push('login')
+        }
+    }
 }
 </script>
 
@@ -46,9 +60,11 @@ nav a {
 nav a:first-of-type {
     border: 0;
 }
-.move-right{
+
+.move-right {
     float: right;
 }
+
 @media (min-width: 1024px) {
     header {
         display: flex;

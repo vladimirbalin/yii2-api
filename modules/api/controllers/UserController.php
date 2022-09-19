@@ -15,10 +15,10 @@ class UserController extends ActiveController
             [
                 'corsFilter' => [
                     'class' => Cors::class,
-//                    'cors' => [
-//                        'Origin' => ['*'],
-//                        'Access-Control-Allow-Credentials' => true,
-//                    ],
+                    'cors' => [
+                        'Origin' => ['http://127.0.0.1:5173'],
+                        'Access-Control-Allow-Credentials' => true,
+                    ],
                 ]
             ]
         );
