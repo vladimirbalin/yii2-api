@@ -1,27 +1,26 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import {RouterLink} from 'vue-router'
 </script>
-<template>
-    <header>
-        <div class="wrapper">
-            <nav>
-                <RouterLink to="/">Home</RouterLink>
-                <RouterLink to="/login">Login</RouterLink>
-                <RouterLink to="/register">Register</RouterLink>
-                <RouterLink to="/user-list">List</RouterLink>
-            </nav>
-        </div>
-    </header>
 
-    <RouterView />
+<template>
+    <nav>
+        <RouterLink to="/">Main</RouterLink>
+<!--        <div v-if="authService.isLoggedIn" class="move-right">-->
+        <div class="move-right">
+            <RouterLink to="/login">Login</RouterLink>
+            <RouterLink to="/register">Register</RouterLink>
+        </div>
+    </nav>
 </template>
+
+<script>
+export default {
+    name: "Navbar"
+}
+</script>
 
 <style scoped>
 
-header {
-    line-height: 1.5;
-    max-width: 100vw;
-}
 
 nav {
     width: 100%;
@@ -47,7 +46,9 @@ nav a {
 nav a:first-of-type {
     border: 0;
 }
-
+.move-right{
+    float: right;
+}
 @media (min-width: 1024px) {
     header {
         display: flex;

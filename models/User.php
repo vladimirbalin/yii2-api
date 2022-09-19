@@ -19,6 +19,13 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         return "{{%users}}";
     }
 
+    public function fields()
+    {
+        $fields = parent::fields();
+        unset($fields['password_hash']);
+
+        return $fields;
+    }
     /**
      * {@inheritdoc}
      */
@@ -39,7 +46,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      * Finds user by username
      *
      * @param string $username
-     * @return User|array|ActiveRecord|null
+     * @return ActiveRecord|array|null
      */
     public static function findByUsername($username)
     {
