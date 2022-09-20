@@ -16,7 +16,7 @@
 
 <script>
 import User from "./User.vue";
-import httpService from "../services/http.service";
+import {FETCH_USERS} from "@/store/actions.type";
 
 export default {
     name: "UserList",
@@ -27,19 +27,12 @@ export default {
             loading: false
         }
     },
-    beforeMount() {
+    async beforeMount() {
         this.loading = true;
+        await this.$store.dispatch(FETCH_USERS)
+        this.loading = false;
 
-        httpService.get('users')
-            .then(({data}) => {
-                this.users = data;
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-            .finally(() => {
-                this.loading = false;
-            });
+        this.users = this.$store.getters.getUsers;
     }
 }
 </script>
