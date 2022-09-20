@@ -1,5 +1,5 @@
 <template>
-    <div class="register">
+    <div class="form-wrapper">
         <h3>Register</h3>
         <form @submit.prevent="register" action="">
             <div v-if="errors" class="errors">
@@ -7,11 +7,11 @@
                     {{ error[0] }}
                 </p>
             </div>
-            <input type="text" v-model="form.username" placeholder="Your name"><br>
-            <input type="text" v-model="form.email" placeholder="Your email"><br>
-            <input type="password" v-model="form.password" placeholder="Your password"><br>
-            <input type="password" v-model="form.password_confirm" placeholder="Repeat password"><br>
-            <button>Register</button>
+            <InputText type="text" v-model="form.username" placeholder="Your name" /><br>
+            <InputText type="text" v-model="form.email" placeholder="Your email" /><br>
+            <InputText type="password" v-model="form.password" placeholder="Your password" /><br>
+            <InputText type="password" v-model="form.password_confirm" placeholder="Repeat password" /><br>
+            <Button type="submit">Register</Button>
             <router-link to="/login" class="link">Click here to login</router-link>
         </form>
     </div>
@@ -43,6 +43,3 @@ export default {
     }
 }
 </script>
-
-<style>
-</style>

@@ -7,3 +7,11 @@
 2. Реализовать UI для вывода данных с АРI на VueJS/React/Angular.
 
 Уточнение: в качестве СУБД использовать Postgres.
+
+
+---
+![demo-gif](/repoimages/gif-image.gif)
+---
+![backend-tree](/repoimages/modules_tree.png)
+---
+![frontend-tree](/repoimages/frontend_tree.png)
