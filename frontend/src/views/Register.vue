@@ -7,15 +7,16 @@
                     {{ error[0] }}
                 </p>
             </div>
-            <InputText type="text" v-model="form.username" placeholder="Your name" /><br>
-            <InputText type="text" v-model="form.email" placeholder="Your email" /><br>
-            <InputText type="password" v-model="form.password" placeholder="Your password" /><br>
-            <InputText type="password" v-model="form.password_confirm" placeholder="Repeat password" /><br>
+            <InputText type="text" v-model="form.username" placeholder="Your name"/>
+            <InputText type="text" v-model="form.email" placeholder="Your email"/>
+            <InputText type="password" v-model="form.password" placeholder="Your password"/>
+            <InputText type="password" v-model="form.password_confirm" placeholder="Repeat password"/>
             <Button type="submit">Register</Button>
             <router-link to="/login" class="link">Click here to login</router-link>
         </form>
     </div>
 </template>
+
 <script>
 export default {
     name: "Register",
@@ -43,3 +44,28 @@ export default {
     }
 }
 </script>
+
+<style>
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-wrapper form {
+    width: 300px;
+}
+
+.p-inputtext {
+    width: 100%;
+}
+
+input {
+    margin: 5px;
+}
+
+.errors {
+    color: red;
+}
+</style>

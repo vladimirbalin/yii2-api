@@ -1,13 +1,9 @@
-<script setup>
-import {RouterLink} from 'vue-router'
-</script>
-
 <template>
     <nav>
-        <RouterLink to="/">Main</RouterLink>
+        <router-link to="/">Main</router-link>
         <div v-if="!isLoggedIn" class="move-right">
-            <RouterLink to="/login">Login</RouterLink>
-            <RouterLink to="/register">Register</RouterLink>
+            <router-link to="/login">Login</router-link>
+            <router-link to="/register">Register</router-link>
         </div>
         <div v-if="isLoggedIn" class="move-right">
             <a href="/logout" @click="logout">Logout</a>
@@ -34,7 +30,6 @@ export default {
 </script>
 
 <style scoped>
-
 
 nav {
     width: 100%;
