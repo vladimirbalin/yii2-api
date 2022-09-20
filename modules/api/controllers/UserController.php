@@ -2,6 +2,7 @@
 
 namespace app\modules\api\controllers;
 
+use yii\filters\auth\HttpBearerAuth;
 use yii\rest\ActiveController;
 use yii\filters\Cors;
 
@@ -15,11 +16,11 @@ class UserController extends ActiveController
             [
                 'corsFilter' => [
                     'class' => Cors::class,
-                    'cors' => [
-                        'Origin' => ['http://127.0.0.1:5173'],
-                        'Access-Control-Allow-Credentials' => true,
-                    ],
-                ]
+                ],
+                'authenticator' => [
+                    'class' => HttpBearerAuth::class,
+                    'except' => ['options']
+                ],
             ]
         );
     }
