@@ -13,7 +13,6 @@ class UserResource extends User
             'email',
             'username',
             'phone',
-            'password_hash',
             'access_token'
         ];
     }
