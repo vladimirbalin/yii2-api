@@ -20,7 +20,6 @@ const actions = {
     async [LOGIN]({commit}, credentials) {
         const response = await httpService.post('auth/login', credentials);
         const user = response.data;
-        localStorage.setItem('user', JSON.stringify(user));
 
         commit(SET_AUTH, user);
     },
@@ -38,6 +37,7 @@ const actions = {
 const mutations = {
     [SET_AUTH](state, user) {
         state.user = user;
+        localStorage.setItem('user', JSON.stringify(user));
         state.isLoggedIn = true
     },
     [PURGE_AUTH](state) {
