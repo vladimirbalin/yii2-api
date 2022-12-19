@@ -2,7 +2,7 @@ import axios from "axios";
 import authService from "@/services/auth.service";
 
 const config = {
-    baseURL: import.meta.env.VITE_API_ENDPOINT
+    baseURL: import.meta.env.VUE_APP_API_ENDPOINT
 }
 const service = axios.create(config);
 
