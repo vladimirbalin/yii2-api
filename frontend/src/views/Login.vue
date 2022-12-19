@@ -10,6 +10,7 @@
             <InputText v-model="form.username" placeholder="Your username"/>
             <InputText type="password" v-model="form.password" placeholder="Your password"/>
             <Button type="submit">Login</Button>
+            <Button v-on:click="fillTestCredentials">Click to fill the form with test credentials</Button>
             <router-link to="/register" class="link">Click here to register</router-link>
         </form>
     </div>
@@ -36,6 +37,10 @@ export default {
             } catch (e) {
                 this.errors = e.response.data.errors;
             }
+        },
+        fillTestCredentials(){
+            this.form.username = 'test';
+            this.form.password = 'test';
         }
     }
 }

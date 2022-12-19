@@ -6,7 +6,6 @@
                 <th>email</th>
                 <th>username</th>
                 <th>phone</th>
-                <th>password_hash</th>
             </tr>
             <user v-for="(user, index) in users" :key="index" :user="user"/>
         </table>
